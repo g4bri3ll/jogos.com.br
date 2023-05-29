@@ -2,85 +2,85 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::RESOURCE('/', 'ControllerUsers');
+Route::resource('/', 'ControllerUsers');
 
-Route::GET('logar', 'ControllerLogin@index')->name('logar');
-Route::POST('logando', 'ControllerLogin@login');
-Route::GET('logout', 'ControllerLogin@logout');
- 
-Route::GET('encRecuperaSenha', 'ControllerUsers@encEmail');
-Route::POST('recuperaSenha', 'ControllerUsers@recuperaSenhaPorEmail');
+Route::get('logar', 'ControllerLogin@index')->name('logar');
+Route::post('logando', 'ControllerLogin@login');
+Route::get('logout', 'ControllerLogin@logout');
 
-Route::POST('cadastra', 'ControllerUsers@cadastrar');
+Route::get('encRecuperaSenha', 'ControllerUsers@encEmail');
+Route::post('recuperaSenha', 'ControllerUsers@recuperaSenhaPorEmail');
 
-Route::GET('retornaCadastro', 'ControllerUsers@fazCadastro');
+Route::post('cadastra', 'ControllerUsers@cadastrar');
+
+Route::get('retornaCadastro', 'ControllerUsers@fazCadastro');
 
 
 //
 Route::group(['middleware' => 'auth'], function () {
 	Route::auth();
-	Route::GET('pagina_inicial', 'ControllerIndex@index')->name('pagina_inicial');
-	
-	Route::RESOURCE('tres', 'ControllerJogoTresPorTres');
+	Route::get('pagina_inicial', 'ControllerIndex@index')->name('pagina_inicial');
+
+	Route::resource('tres', 'ControllerJogoTresPorTres');
 
 	//Route::resource('excel', 'ControllerExcel');
 	//Route::GET('excelIndex/{codigo?}', 'ControllerExcelQuatroPorQ@index');
 
-	Route::GET('pdfCentral/{codigo}', 'ControllerResourceJogosSalvos@geraPDF');
+	Route::get('pdfCentral/{codigo}', 'ControllerResourceJogosSalvos@geraPDF');
 
-	Route::GET('pdfQuatro/{codigo}', 'ControllerPDFQuatroPorQ@geraPDF');
+	Route::get('pdfQuatro/{codigo}', 'ControllerPDFQuatroPorQ@geraPDF');
 
-	Route::GET('pdfTres/{codigo}', 'ControllerPDFTresPorT@geraPDF');
+	Route::get('pdfTres/{codigo}', 'ControllerPDFTresPorT@geraPDF');
 
-	Route::GET('pdfCinco/{codigo}', 'ControllerPDFCincoPorC@geraPDF');
+	Route::get('pdfCinco/{codigo}', 'ControllerPDFCincoPorC@geraPDF');
 
-	Route::GET('pdfSete/{codigo}', 'ControllerPDFSetePorS@geraPDF');
+	Route::get('pdfSete/{codigo}', 'ControllerPDFSetePorS@geraPDF');
 
-	Route::GET('quatro/{error?}', 'ControllerJogoQuatroPorQ@index')->name('quatro');
+	Route::get('quatro/{error?}', 'ControllerJogoQuatroPorQ@index')->name('quatro');
 
-	Route::GET('cinco/{error?}', 'ControllerJogoCincoPorCinco@index')->name('cinco');
+	Route::get('cinco/{error?}', 'ControllerJogoCincoPorCinco@index')->name('cinco');
 
-	Route::GET('sete/{error?}', 'ControllerJogoSetePorSete@index')->name('sete');
+	Route::get('sete/{error?}', 'ControllerJogoSetePorSete@index')->name('sete');
 
-	Route::GET('encAlteraSenha', 'ControllerUsers@encAlteraSenha');
-	Route::POST('alteraSenha', 'ControllerUsers@alteraSenha');
+	Route::get('encAlteraSenha', 'ControllerUsers@encAlteraSenha');
+	Route::post('alteraSenha', 'ControllerUsers@alteraSenha');
 
-	Route::GET('rastreador/{qtd?}', 'ControllerJogoRastreador@index');
+	Route::get('rastreador/{qtd?}', 'ControllerJogoRastreador@index');
 
-	Route::GET('ajudar', 'ControllerAjudar@index');
+	Route::get('ajudar', 'ControllerAjudar@index');
 
-	Route::GET('atualizaBD/{numeroConcurso}', 'ControllerAPILoteria@atualizaBD')->name('atualizaBD');
-	Route::GET('verificaAPI', 'ControllerAPILoteria@verificaAtualizacao')->name('verificaAPI');
+	Route::get('atualizaBD/{numeroConcurso}', 'ControllerAPILoteria@atualizaBD')->name('atualizaBD');
+	Route::get('verificaAPI', 'ControllerAPILoteria@verificaAtualizacao')->name('verificaAPI');
 
 	//Salvar os jogos na base de dados
-	Route::ANY('salvaPar/{par?}/{impar?}/{codigo?}', 'ControllerResourceTresPorTres@salvaJogosPar')->name('salvaPar');
+	Route::any('salvaPar/{par?}/{impar?}/{codigo?}', 'ControllerResourceTresPorTres@salvaJogosPar')->name('salvaPar');
 
 	Route::get('listaJogosPorTres/{codigo}/{true?}', 'ControllerResourceTresPorTres@index')->name('listaJogosPorTres');
 
-	Route::POST('salvaJogoQuatro', 'ControllerResourceQuatroPorQ@salvaJogos');
-	Route::GET('listaJogoQuatro/{codigo?}', 'ControllerResourceQuatroPorQ@listaJogosQuatro')->name('listaJogoQuatro');
-	Route::GET('listJogosQuatro/{codigo}/{true?}', 'ControllerResourceQuatroPorQ@listaJogosQ')->name('listJogosQuatro');
+	Route::post('salvaJogoQuatro', 'ControllerResourceQuatroPorQ@salvaJogos');
+	Route::get('listaJogoQuatro/{codigo?}', 'ControllerResourceQuatroPorQ@listaJogosQuatro')->name('listaJogoQuatro');
+	Route::get('listJogosQuatro/{codigo}/{true?}', 'ControllerResourceQuatroPorQ@listaJogosQ')->name('listJogosQuatro');
 
-	Route::POST('salvaJogoCinco', 'ControllerResourceCincoPorC@salvaNumerosCinco');
-	Route::GET('svJogoCinco/{codigo}', 'ControllerResourceCincoPorC@salvaJogoCinco')->name('svJogoCinco');
-	Route::GET('listaJogosC/{codigo}/{true?}', 'ControllerResourceCincoPorC@listaJogos')->name('listaJogosC');
+	Route::post('salvaJogoCinco', 'ControllerResourceCincoPorC@salvaNumerosCinco');
+	Route::get('svJogoCinco/{codigo}', 'ControllerResourceCincoPorC@salvaJogoCinco')->name('svJogoCinco');
+	Route::get('listaJogosC/{codigo}/{true?}', 'ControllerResourceCincoPorC@listaJogos')->name('listaJogosC');
 
-	Route::GET('salvaJogoUsers/{codigo}', 'ControllerResourceJogosSalvos@salvaJogoUsers');
+	Route::get('salvaJogoUsers/{codigo}', 'ControllerResourceJogosSalvos@salvaJogoUsers');
 
-	Route::ANY('listaPorConcurso', 'ControllerResourceJogosSalvos@listaPorConcurso')->name('listaPorConcurso');
+	Route::any('listaPorConcurso', 'ControllerResourceJogosSalvos@listaPorConcurso')->name('listaPorConcurso');
 
-	Route::POST('salvaJogoSete', 'ControllerResourceSetePorS@salvaJogos');
-	Route::GET('gravaJogoSete/{codigo}', 'ControllerResourceSetePorS@gravaJgSete')->name('gravaJogoSete');
-	Route::GET('listaJogosSete/{codigo}/{true?}', 'ControllerResourceSetePorS@listaJogos')->name('listaJogosSete');
+	Route::post('salvaJogoSete', 'ControllerResourceSetePorS@salvaJogos');
+	Route::get('gravaJogoSete/{codigo}', 'ControllerResourceSetePorS@gravaJgSete')->name('gravaJogoSete');
+	Route::get('listaJogosSete/{codigo}/{true?}', 'ControllerResourceSetePorS@listaJogos')->name('listaJogosSete');
 
-	Route::GET('listaJogosSalvos', 'ControllerResourceJogosSalvos@index');
+	Route::get('listaJogosSalvos', 'ControllerResourceJogosSalvos@index');
 
-	Route::RESOURCE('jogos', 'ControllerJogosSalvos');
+	Route::resource('jogos', 'ControllerJogosSalvos');
 
-	Route::GET('excluirJogoSalvo/{codigo?}', 'ControllerResourceJogosSalvos@excluirJogo');
-	Route::GET('listaJogoSalvo/{codigo?}', 'ControllerResourceJogosSalvos@listaJogoSalvo');
+	Route::get('excluirJogoSalvo/{codigo?}', 'ControllerResourceJogosSalvos@excluirJogo');
+	Route::get('listaJogoSalvo/{codigo?}', 'ControllerResourceJogosSalvos@listaJogoSalvo');
 
-	Route::RESOURCE('lotofacil', 'ControllerLotofacil');
+	Route::resource('lotofacil', 'ControllerLotofacil');
 
 });
 

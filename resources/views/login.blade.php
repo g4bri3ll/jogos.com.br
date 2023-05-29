@@ -19,7 +19,7 @@
   <form method="POST" action="{{ url('logando') }}">
     {{ csrf_field() }}
     <h4 class="form-signin-heading">Sistema loteria</h4>
-    <input type="email" class="input-block-level" placeholder="Email" name="email" />
+    <input type="text" class="input-block-level" placeholder="Email" name="email" />
     <input type="password" class="input-block-level" placeholder="Senha" name="pwd" />
     <label class="checkbox">
       <input type="checkbox" value="remember-me"> Lembra senha

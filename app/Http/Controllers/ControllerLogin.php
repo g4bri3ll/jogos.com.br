@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Validator;
-use Hash;
-use Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class ControllerLogin extends Controller
 {
-    
+
     public function index()
     {
         return view('login');
@@ -40,23 +35,18 @@ class ControllerLogin extends Controller
         }
 
         $credentials = [
-            'email' => $request->get('email'), 
+            'email' => $request->get('email'),
             'password' => $request->get('pwd')
         ];
 
         if (auth()->guard('web')->attempt($credentials))
         {
-            //Chama a rota para verificar o concurso
-            return redirect()->route('verificaAPI');
+            return redirect()->route('pagina_inicial');
         } else {
             return view('login')
                 ->with('false', 'E-mail ou senha invalido, tente novamente !!!')
                 ->withInput([$request->email, $request->pwd]);
         }
-        
-        //Autenticando o usuário logado na session
-        //$eduzzAPI = new Eduzz();
-        //$dadosToken = $eduzzAPI->autenticandoAPI();
 
     }
 

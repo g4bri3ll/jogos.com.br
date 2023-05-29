@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Models;
 
@@ -11,23 +11,23 @@ class LotofacilBD {
 	//
 	public function listaNImpar()
 	{
-		try 
+		try
 		{
 			$list = DB::table('numeros')->get();
 
 			return $list;
-		} 
-		catch(FatalThrowableError $e) 
-		{
-    		echo "Erro de exception"; 
 		}
-		
+		catch(FatalThrowableError $e)
+		{
+    		echo "Erro de exception";
+		}
+
 	}
 
 	//Faz a gravação dos dados da API no banco de dados
 	public function gravaAPILoteria($resultado, $numeroConcurso, $dataSorteio, $proxDtConcurso, $acumulou, $premioAcumulad, $valorEstimado)
 	{
-		
+
 		$um_num;
 		$dois_num;
 		$tres_num;
@@ -65,7 +65,7 @@ class LotofacilBD {
 			$quinze_num   = $array[14];
 
 		}
-		
+
 		DB::insert('INSERT INTO lotofacils (um_num, dois_num, tres_num, quatro_num, cinco_num, seis_num, sete_num, oito_num, nove_num, dez_num, onze_num, doze_num, treze_num, quartoze_num, quinze_num, numero_concurso, data_sorteio, acumulou, premio_acumulado, valor_estimado) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [$um_num, $dois_num, $tres_num, $quarto_num, $cinco_num, $seis_num, $sete_num, $oito_num, $nove_num, $dez_num, $onze_num, $doze_num, $treze_num, $quartoze_num, $quinze_num, $numeroConcurso, $dataSorteio, $acumulou, $premioAcumulad, $valorEstimado]);
 
 	}
@@ -105,11 +105,11 @@ class LotofacilBD {
 
 	public function dadosAPI($numeroConcurso)
 	{
-		
+
 		//Verificar se o chamado está pra algum numero especifico
 		if (empty($numeroConcurso)) {
 			//Chamada da funcão para os resultado da loteria
-        	$api = new \GiordanoLima\LoteriasApi\Lotofacil();
+            $api = new \GiordanoLima\LoteriasApi\Lotofacil();
 		} else {
 			//Chamada da funcão para os resultado da loteria
         	$api = new \GiordanoLima\LoteriasApi\Lotofacil($numeroConcurso);
@@ -134,7 +134,7 @@ class LotofacilBD {
         $valorEstimado  = $api->getValorEstimado();
         //$valorEstimado = str_replace(['.',','],'', $valorEstimado);
 
-        $arrayAPIValor = 
+        $arrayAPIValor =
         [
         	'resultado'      => $resultado,
         	'numeroConcurso' => $numeroConcurso,
@@ -156,7 +156,7 @@ class LotofacilBD {
 		$arrayJogo = DB::select('SELECT * FROM lotofacils ORDER BY numero_concurso DESC LIMIT ?', [$qtd]);
 
 		return $arrayJogo;
-		
+
 	}
 
 	//Lista os ultimos 10 jogos
@@ -166,15 +166,15 @@ class LotofacilBD {
 		$arrayJogo = DB::select('SELECT * FROM lotofacils ORDER BY numero_concurso DESC LIMIT 10');
 
 		return $arrayJogo;
-		
+
 	}
 
 	public function verificarExisteCodigo($codigo)
 	{
-		
-		$jogoCinco = DB::select('SELECT * FROM jogo_cinco where codigo = ?', [$codigo]); 
+
+		$jogoCinco = DB::select('SELECT * FROM jogo_cinco where codigo = ?', [$codigo]);
 		$jogoQuatro = DB::select('SELECT * FROM jogo_quatros where codigo = ?', [$codigo]);
-		$jogoSete = DB::select('SELECT * FROM jogo_setes where codigo = ?', [$codigo]); 
+		$jogoSete = DB::select('SELECT * FROM jogo_setes where codigo = ?', [$codigo]);
 		$jogoTres = DB::select('SELECT * FROM jogo_tress where codigo_jogo = ?', [$codigo]);
 
 		$arrayTotal = [
@@ -190,62 +190,62 @@ class LotofacilBD {
 
 	public function salvaJogoTres($codigo)
 	{
-		try 
+		try
 		{
 			$list = DB::select('UPDATE temp_jogos_tres SET salvar = 1 WHERE codigo = ?', [$codigo]);
 
 			return 0;
-		} 
-		catch(FatalThrowableError $e) 
+		}
+		catch(FatalThrowableError $e)
 		{
-    		echo "Erro de exception" . $e->getMessage();  
+    		echo "Erro de exception" . $e->getMessage();
 		}
 
 	}
 
 	public function salvaJogoSete($codigo)
 	{
-		try 
+		try
 		{
 			$list = DB::select('UPDATE temp_jogos_sete SET status = 1 WHERE codigo = ?', [$codigo]);
 
 			return 0;
-		} 
-		catch(FatalThrowableError $e) 
-		{
-    		echo "Erro de exception" . $e->getMessage();  
 		}
-		
+		catch(FatalThrowableError $e)
+		{
+    		echo "Erro de exception" . $e->getMessage();
+		}
+
 	}
 
 	public function salvaJogoQuatro($codigo)
 	{
-		try 
+		try
 		{
 			$list = DB::select('UPDATE temp_jogos_quatro SET status = 1 WHERE codigo = ?', [$codigo]);
 
 			return 0;
-		} 
-		catch(FatalThrowableError $e) 
+		}
+		catch(FatalThrowableError $e)
 		{
     		echo "Erro de exception" . $e->getMessage();
 		}
-		
+
 	}
 
 	public function salvaJogoCinco($codigo)
 	{
-		try 
+		try
 		{
 			$list = DB::select('UPDATE temp_jogos_cinco SET status = 1 WHERE codigo = ?', [$codigo]);
 
 			return 0;
-		} 
-		catch(FatalThrowableError $e) 
-		{
-    		echo "Erro de exception" . $e->getMessage();  
 		}
-		
+		catch(FatalThrowableError $e)
+		{
+    		echo "Erro de exception" . $e->getMessage();
+		}
+
 	}
 
 	public function pegarJogoPeloId($idConcurso)

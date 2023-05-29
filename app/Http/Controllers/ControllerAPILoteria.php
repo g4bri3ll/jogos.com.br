@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\LotofacilBD;
 
 class ControllerAPILoteria extends Controller
@@ -10,7 +9,7 @@ class ControllerAPILoteria extends Controller
 
     public function atualizaBD($numeroConcurso)
     {
-        
+
         $loteria = new LotofacilBD();
         $arrayDados = $loteria->dadosAPI($numeroConcurso);
 
@@ -20,7 +19,7 @@ class ControllerAPILoteria extends Controller
         $proxDtConcurso = $arrayDados['proxDtConcurso'];
         $acumulou       = $arrayDados['acumulou'];
         $premioAcumulad = $arrayDados['premioAcumulad'];
-        $valorEstimado  = $arrayDados['valorEstimado'];       
+        $valorEstimado  = $arrayDados['valorEstimado'];
 
         $loteria = new LotofacilBD();
         $loteria->gravaAPILoteria($resultado, $numeroConcurso, $dataSorteio, $proxDtConcurso, $acumulou, $premioAcumulad, $valorEstimado);
@@ -49,16 +48,21 @@ class ControllerAPILoteria extends Controller
 
         //Verificar se o ultimo cadastro do banco de dados foi do concurso atual
         if ($numeroConcurso > $num_concurso) {
-            
+
             return redirect()->route('atualizaBD', $numeroConcurso);
 
         } else {
-            
+
             //Retorna para o index inicial
             return redirect()->route('pagina_inicial');
-                    
+
         }
-        
+
+    }
+
+    public function buscarDadosAPI()
+    {
+
     }
 
 }

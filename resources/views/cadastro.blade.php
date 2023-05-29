@@ -20,7 +20,7 @@
   <form method="POST" action="{{ url('cadastra') }}">
     {{ csrf_field() }}
     <h4 class="form-signin-heading">Cadastro de acesso</h4>
-    <input type="email" class="input-block-level" placeholder="Email" name="email" />
+    <input type="text" class="input-block-level" placeholder="Email" name="email" />
     <input type="text" class="input-block-level" placeholder="Informe seu nome" name="nome" />
     <input type="password" class="input-block-level" placeholder="Senha" name="pwd" />
     <input type="password" class="input-block-level" placeholder="Confirme sua senha" name="Cpwd" />

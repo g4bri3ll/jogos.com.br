@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use DB;
+use Illuminate\Support\Facades\DB;
 use Exception;
-use Hash;
 use App\Classes\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserBD extends Exception
 {
@@ -61,35 +61,32 @@ class UserBD extends Exception
 			return $users;
 
 		} catch (Exception $e) {        // ... mas não aqui.
-    		return "Pegou Exception padrão <br />" . $e;
+    		return "Pegou Exception padrão <br />" . $e->getMessage();
 		}
 
 	}
 
+    /**
+     * @param $senha
+     * @param $idUser
+     * @return string|true
+     */
 	public function salvaSenhaNova($senha, $idUser)
 	{
-
 		try {
-
 			DB::select('UPDATE users SET password = ? WHERE id = ?', [$senha, $idUser]);
-
-			return 0;
-
+			return true;
 		} catch (Exception $e) {
-    		return "Pegou Exception padrão <br />" . $e;
+    		return "Pegou Exception padrão <br />" . $e->getMessage();
 		}
-		
 	}
 
 	public function validaEmail($email)
 	{
-
 		$retornaEmail = DB::select('SELECT * FROM users WHERE email LIKE ?', [$email]);
-
 		return $retornaEmail;
-
 	}
-	
+
 }
 
 ?>

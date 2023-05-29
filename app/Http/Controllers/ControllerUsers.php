@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Classes\User;
-use Validator;
-use Auth;
 use App\Models\UserBD;
-use Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ControllerUsers extends Controller
 {
-	
+
 	public function index()
 	{
 		return view('login');
@@ -29,7 +29,7 @@ class ControllerUsers extends Controller
 
 	public function alteraSenha(Request $request)
     {
-        
+
         if (empty($request->pwdN) || empty($request->pwdC)) {
             return view('senha')
                     ->with('false', 'Senha vazia invalida !!!');
@@ -56,13 +56,10 @@ class ControllerUsers extends Controller
 
         //Salva a nova senha
         $useDAO = new UserBD();
-        $rec = $useDAO->salvaSenhaNova($senha, $idUser);
-
-        if (empty($rec)) {
+        if ($useDAO->salvaSenhaNova($senha, $idUser)) {
             return view('index')
                     ->with('true', 'Senha alterada com sucesso !!!');
         } else {
-
             return view('index')
                     ->with('false', 'Ocorreu um erro, favor tente mais tarde !!!');
 
@@ -72,7 +69,7 @@ class ControllerUsers extends Controller
 
     public function cadastrar(Request $request)
     {
-    	
+
     	//So aceita se o request estiver preenchido
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|min:5',
@@ -84,7 +81,7 @@ class ControllerUsers extends Controller
         if ($validator->fails()) {
             return view('cadastro')
                 ->with('false', 'Dados passados invalido, verifique e tente novamente !!!');
-        } 
+        }
 
         if($request->pwd != $request->Cpwd){
         	return view('cadastro')
@@ -121,7 +118,7 @@ class ControllerUsers extends Controller
 
     public function recuperaSenhaPorEmail(Request $request)
     {
-        
+
         //So aceita se o request estiver preenchido
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|min:5'
