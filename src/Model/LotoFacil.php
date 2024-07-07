@@ -2,6 +2,7 @@
 
 namespace src\Model;
 
+use src\DAO\LotoFacilDAO;
 use src\Service\LotoFacil\CalculaQuantasVezesONumeroSaiuPorIntervaloDeJogo;
 use src\Service\LotoFacil\RetornaApenasOJogoENumeros;
 
@@ -162,6 +163,34 @@ class LotoFacil
         return true;
     }
 
+    public function listaNumerosSaidosConcursos()
+    {
+        $lotofacilDAO = new LotoFacilDAO();
+        $jogos = $lotofacilDAO->listaJogo();
+
+        $resultLotofacil = array();
+
+        foreach ($jogos as $jogo) {
+
+            $concurso = $jogo['COL 1'];
+
+            //Remove a posição do concurso
+            unset($jogo['COL 1']);
+
+            //Remove a data do concurso
+            unset($jogo['COL 2']);
+
+            //Resta apenas os numeros saído deste concurso nessa variável $jogo
+            //Converte para string a variavel $numeros
+            $numeros = implode(",", $jogo);
+
+            $resultLotofacil[$concurso] = $numeros;
+        }
+
+        return $resultLotofacil;
+
+    }
+
     /**
      * Retorna todos os numeros pela maior quantidade que ele saiu
      * Ex: Quem saiu mais vezes e o primeiro da lista
@@ -199,15 +228,10 @@ class LotoFacil
      * Este método aqui, somar o valor dos números que saiu por jogo e retorna o array
      * Quantidade de vezes que saiu e o valor total do jogo
      */
-    public function retornaAFrequenciaDosNumeros(array $arrayNumeroLotoFacil)
+    public function retornaAFrequenciaDosNumeros(array $resultadosLotoFacil)
     {
-
-        $limpaArquivo = new RetornaApenasOJogoENumeros();
-        $arrayNumeroLotoFacil = $limpaArquivo->limpaArquivoLotoFacil($arrayNumeroLotoFacil);
-
         $calculaNumero = new CalculaQuantasVezesONumeroSaiuPorIntervaloDeJogo();
-        return $calculaNumero->retornaQuantidadePorJogo($arrayNumeroLotoFacil);
-
+        return $calculaNumero->retornaQuantidadePorJogo($resultadosLotoFacil);
     }
 
     /**

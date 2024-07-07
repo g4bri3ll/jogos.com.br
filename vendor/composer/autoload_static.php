@@ -59,7 +59,13 @@ class ComposerStaticInit837d03153adf09cfda31fcf3fb5a6b4e
         'app\\Controller\\ControllerNumerosJogador' => __DIR__ . '/../..' . '/app/Controller/ControllerNumerosJogador.php',
         'app\\Controller\\ControllerNumerosJogoLotoFacil' => __DIR__ . '/../..' . '/app/Controller/ControllerNumerosJogoLotoFacil.php',
         'config\\ConfiguracaoInterface' => __DIR__ . '/../..' . '/config/ConfiguracaoInterface.php',
+        'config\\conn\\ConexaoMySQL' => __DIR__ . '/../..' . '/config/conn/ConexaoMySQL.php',
+        'src\\DAO\\LotoFacilDAO' => __DIR__ . '/../..' . '/src/DAO/LotoFacilDAO.php',
         'src\\Model\\LotoFacil' => __DIR__ . '/../..' . '/src/Model/LotoFacil.php',
+        'src\\Service\\LotoFacil\\CalculaQuantasVezesONumeroSaiuPorIntervaloDeJogo' => __DIR__ . '/../..' . '/src/Service/LotoFacil/CalculaQuantasVezesONumeroSaiuPorIntervaloDeJogo.php',
+        'src\\Service\\LotoFacil\\RetornaApenasNumerosSaidos' => __DIR__ . '/../..' . '/src/Service/LotoFacil/RetornaApenasNumerosSaidos.php',
+        'src\\Service\\LotoFacil\\RetornaApenasOJogoENumeros' => __DIR__ . '/../..' . '/src/Service/LotoFacil/RetornaApenasOJogoENumeros.php',
+        'src\\Service\\LotoFacil\\RetornaFrequenciaSaidaNumeros' => __DIR__ . '/../..' . '/src/Service/LotoFacil/RetornaFrequenciaSaidaNumeros.php',
         'teste\\Exec' => __DIR__ . '/../..' . '/teste/Exec.php',
     );
 

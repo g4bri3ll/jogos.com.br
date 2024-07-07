@@ -16,6 +16,8 @@ class RetornaApenasOJogoENumeros
 
         foreach ($resultadosLotoFacil as $item){
 
+            print_r($item);
+            exit();
             if (is_numeric($item[0])){
                 $result[$item[0]] = $item[1];
             }

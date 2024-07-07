@@ -12,6 +12,12 @@ return array(
     'app\\Controller\\ControllerNumerosJogador' => $baseDir . '/app/Controller/ControllerNumerosJogador.php',
     'app\\Controller\\ControllerNumerosJogoLotoFacil' => $baseDir . '/app/Controller/ControllerNumerosJogoLotoFacil.php',
     'config\\ConfiguracaoInterface' => $baseDir . '/config/ConfiguracaoInterface.php',
+    'config\\conn\\ConexaoMySQL' => $baseDir . '/config/conn/ConexaoMySQL.php',
+    'src\\DAO\\LotoFacilDAO' => $baseDir . '/src/DAO/LotoFacilDAO.php',
     'src\\Model\\LotoFacil' => $baseDir . '/src/Model/LotoFacil.php',
+    'src\\Service\\LotoFacil\\CalculaQuantasVezesONumeroSaiuPorIntervaloDeJogo' => $baseDir . '/src/Service/LotoFacil/CalculaQuantasVezesONumeroSaiuPorIntervaloDeJogo.php',
+    'src\\Service\\LotoFacil\\RetornaApenasNumerosSaidos' => $baseDir . '/src/Service/LotoFacil/RetornaApenasNumerosSaidos.php',
+    'src\\Service\\LotoFacil\\RetornaApenasOJogoENumeros' => $baseDir . '/src/Service/LotoFacil/RetornaApenasOJogoENumeros.php',
+    'src\\Service\\LotoFacil\\RetornaFrequenciaSaidaNumeros' => $baseDir . '/src/Service/LotoFacil/RetornaFrequenciaSaidaNumeros.php',
     'teste\\Exec' => $baseDir . '/teste/Exec.php',
 );
