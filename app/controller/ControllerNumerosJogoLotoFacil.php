@@ -2,11 +2,12 @@
 
 namespace app\controller;
 
+use config\RequestController;
 use Illuminate\Support\Facades\View;
 use src\Model\LotoFacil;
 use src\Service\LotoFacil\CalculaValorTotalPorJogo;
 
-class ControllerNumerosJogoLotoFacil extends Controller
+class ControllerNumerosJogoLotoFacil extends RequestController
 {
 
     public function taksView()
@@ -17,7 +18,7 @@ class ControllerNumerosJogoLotoFacil extends Controller
         switch ($request) {
             case 'retornanumerosporquantidademaissaida':
                 self::retornaNumerosPorQuantidadeMaisSaida();
-                View::make('paginaInicial', ['']);
+                $this->View('paginaInicial', []);
                 break;
             case 'retornasomaporjogo':
                 self::retornaSomaPorJogo([], 1);
