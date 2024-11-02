@@ -3,7 +3,6 @@
     "autoload": {
         "psr-4": {
             "app\\": "app/",
-            "teste\\": "teste/",
             "config\\": "config/",
             "src\\": "src/",
             "Uteis\\": "Uteis/"
@@ -15,5 +14,10 @@
             "email": "gabrieldonascimentoborges@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "coffeecode/router": "^1.0.7",
+        "league/plates": "^3.5",
+        "illuminate/routing": "^8.83",
+        "illuminate/view": "^8.83"
+    }
 }

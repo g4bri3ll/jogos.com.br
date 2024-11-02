@@ -6,18 +6,12 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'Uteis\\InserirSort' => $baseDir . '/Uteis/InserirSort.php',
-    'app\\Configuracao' => $baseDir . '/app/Configuracao.php',
-    'app\\Controller\\ControllerNumerosJogador' => $baseDir . '/app/Controller/ControllerNumerosJogador.php',
-    'app\\Controller\\ControllerNumerosJogoLotoFacil' => $baseDir . '/app/Controller/ControllerNumerosJogoLotoFacil.php',
-    'config\\ConfiguracaoInterface' => $baseDir . '/config/ConfiguracaoInterface.php',
-    'config\\conn\\ConexaoMySQL' => $baseDir . '/config/conn/ConexaoMySQL.php',
-    'src\\DAO\\LotoFacilDAO' => $baseDir . '/src/DAO/LotoFacilDAO.php',
-    'src\\Model\\LotoFacil' => $baseDir . '/src/Model/LotoFacil.php',
-    'src\\Service\\LotoFacil\\CalculaQuantasVezesONumeroSaiuPorIntervaloDeJogo' => $baseDir . '/src/Service/LotoFacil/CalculaQuantasVezesONumeroSaiuPorIntervaloDeJogo.php',
-    'src\\Service\\LotoFacil\\RetornaApenasNumerosSaidos' => $baseDir . '/src/Service/LotoFacil/RetornaApenasNumerosSaidos.php',
-    'src\\Service\\LotoFacil\\RetornaApenasOJogoENumeros' => $baseDir . '/src/Service/LotoFacil/RetornaApenasOJogoENumeros.php',
-    'src\\Service\\LotoFacil\\RetornaFrequenciaSaidaNumeros' => $baseDir . '/src/Service/LotoFacil/RetornaFrequenciaSaidaNumeros.php',
-    'teste\\Exec' => $baseDir . '/teste/Exec.php',
+    'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+    'Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+    'PhpToken' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
+    'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+    'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+    'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
 );

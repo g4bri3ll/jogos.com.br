@@ -1,37 +1,66 @@
 <?php
 
-namespace app\Controller;
+namespace app\controller;
 
-use config\ConfiguracaoInterface;
+use Illuminate\Support\Facades\View;
 use src\Model\LotoFacil;
 use src\Service\LotoFacil\CalculaValorTotalPorJogo;
 
-class ControllerNumerosJogoLotoFacil extends LotoFacil implements ConfiguracaoInterface
+class ControllerNumerosJogoLotoFacil extends Controller
 {
 
-    /**
-     * @param array $resultadosLotoFacil
-     * @param int $qtdNumerosMaisSaidos
-     * @return array
-     */
-    public function retornaNumerosPorQuantidadeMaisSaida(array $resultadosLotoFacil, int $qtdNumerosMaisSaidos)
+    public function taksView()
     {
 
-        foreach ($resultadosLotoFacil as $item){
+        $request = strtolower($this->exec());
+
+        switch ($request) {
+            case 'retornanumerosporquantidademaissaida':
+                self::retornaNumerosPorQuantidadeMaisSaida();
+                View::make('paginaInicial', ['']);
+                break;
+            case 'retornasomaporjogo':
+                self::retornaSomaPorJogo([], 1);
+                break;
+            case 'redirecionarlistamedianumerosmaissaidos':
+                echo "i equals 2";
+                break;
+            case 'redirecionarposicaosaidas':
+                echo "i equals 2";
+                break;
+            case 'redirecionarquinzenúmerosmaissaidos':
+                echo "i equals 2";
+                break;
+            default:
+                self::retornaNumerosPorQuantidadeMaisSaida();
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function retornaNumerosPorQuantidadeMaisSaida()
+    {
+
+        $qtdNumerosMaisSaidos = 10;
+
+        $lotoFacil = new LotoFacil();
+        $resultadosLotoFacil = $lotoFacil->listaNumerosSaidosConcursos();
+
+        foreach ($resultadosLotoFacil as $item) {
             $numerosJogos = explode(",", $item);
 
-            self::contaQtdNumeroMaisSaidos($numerosJogos);
+            $lotoFacil->contaQtdNumeroMaisSaidos($numerosJogos);
         }
 
         /**
          * Função que server somente para ordernar o array do maior para o menor
          */
-        self::ordernaPorOrdemDescrecente();
+        $lotoFacil->ordernaPorOrdemDescrecente();
 
-        $arrayQtdNumerosMaisSaidos = self::retornaNumerosMaisSaido($qtdNumerosMaisSaidos);
+        $arrayQtdNumerosMaisSaidos = $lotoFacil->retornaNumerosMaisSaido($qtdNumerosMaisSaidos);
 
         return $arrayQtdNumerosMaisSaidos;
-
     }
 
     /**
@@ -44,11 +73,10 @@ class ControllerNumerosJogoLotoFacil extends LotoFacil implements ConfiguracaoIn
         $calculaValorTotalPorJogo = new CalculaValorTotalPorJogo();
         $todosJogosSomados = $calculaValorTotalPorJogo->CalculaValorTotalPorJogo($resultadosLotoFacil);
 
-        if ($isRepetido){
+        if ($isRepetido) {
             return $todosJogosSomados;
         }
 
         return $calculaValorTotalPorJogo->retornaJogoSomandaSemRepetir($todosJogosSomados);
     }
-
 }

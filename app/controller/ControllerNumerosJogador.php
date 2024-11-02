@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Controller;
+namespace app\controller;
 
 use app\Configuracao;
 
-class ControllerNumerosJogador extends Configuracao
+abstract class ControllerNumerosJogador extends Controller
 {
 
     public function retornaNumeroJogador()
@@ -18,7 +18,7 @@ class ControllerNumerosJogador extends Configuracao
 
         fclose($arquivo);
 
-        if (count($result) != self::QTD_NUMERO_PERMITIDO){
+        if (count($result) != Configuracao::QTD_NUMERO_PERMITIDO){
             echo "Quantidade de númnero inválido!";
             exit;
         }

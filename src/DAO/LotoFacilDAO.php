@@ -4,23 +4,29 @@ namespace src\DAO;
 
 use config\conn\ConexaoMySQL;
 
-class LotoFacilDAO extends ConexaoMySQL
+class LotoFacilDAO
 {
+
+    public function conn()
+    {
+        return ConexaoMySQL::getConnection();
+    }
 
     public function listaJogo()
     {
+        $query = $this->conn()->query(
+            "select 
+                *
+            from 
+                lotofacil"
+        );
+        return $query->fetchAll();
+    }
 
-        $sql = "select * from lotofacil";
+    public function listaUltimoJogo()
+    {
 
-        $resultado = mysqli_query($this->openConnect(), $sql);
-
-        $array = array();
-        while ($row = mysqli_fetch_assoc($resultado)) {
-            $array[]=$row;
-        }
-        $this->closeConnect();
-
-        return $array;
-
+        $query = $this->conn()->query("select COL_1 from lotofacil order by COL_1 desc limit 1");
+        $query->fetchAll();
     }
 }

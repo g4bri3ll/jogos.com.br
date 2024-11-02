@@ -1,8 +1,9 @@
 <?php
 
-namespace app\Router;
+namespace app\router;
 
-class Router
-{
+use Illuminate\Support\Facades\Route;
 
-}
+Route::get('/', function () {
+    return 'Hello!';
+});

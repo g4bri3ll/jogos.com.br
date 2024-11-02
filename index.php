@@ -1,10 +1,7 @@
 <?php
 
+use app\controller\ControllerNumerosJogoLotoFacil;
+
 require 'vendor\autoload.php';
 
-use teste\Exec;
-
-$exec = new Exec();
-print_r($exec->exe());
-
-?>
+(new ControllerNumerosJogoLotoFacil())->taksView();

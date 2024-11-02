@@ -3,16 +3,41 @@
 namespace src\Model;
 
 use src\DAO\LotoFacilDAO;
+use src\Service\LotoFacil\CalculaPorcetagemSaidaPorPosicao;
 use src\Service\LotoFacil\CalculaQuantasVezesONumeroSaiuPorIntervaloDeJogo;
-use src\Service\LotoFacil\RetornaApenasOJogoENumeros;
+use src\Service\LotoFacil\RetornaValorTotalPorPosicaoJogo;
 
 class LotoFacil
 {
 
-    private $arrayNumeroLotoFacil = ["um" => 1, "dois" => 2, "tres" => 3, "quatro" => 4, "cinco" => 5, "seis" => 6,
-        "sete" => 7, "oito" => 8, "nove" => 9, "dez" => 10, "onze" => 11, "doze" => 12, "treze" => 13, "quartoze" => 14,
-        "quinze" => 15, "dezesseis" => 16, "dezesete" => 17, "dezoito" => 18, "dezenove" => 19, "vinte" => 20, "vinte_um" => 21,
-        "vinte_dois" => 22, "vinte_tres" => 23, "vinte_quatro" => 24, "vinte_cinco" => 25];
+    const QUANTIDADE_NUMEROS_JOGOS = 15;
+    private $arrayNumeroLotoFacil = [
+        "um" => 1,
+        "dois" => 2,
+        "tres" => 3,
+        "quatro" => 4,
+        "cinco" => 5,
+        "seis" => 6,
+        "sete" => 7,
+        "oito" => 8,
+        "nove" => 9,
+        "dez" => 10,
+        "onze" => 11,
+        "doze" => 12,
+        "treze" => 13,
+        "quartoze" => 14,
+        "quinze" => 15,
+        "dezesseis" => 16,
+        "dezesete" => 17,
+        "dezoito" => 18,
+        "dezenove" => 19,
+        "vinte" => 20,
+        "vinte_um" => 21,
+        "vinte_dois" => 22,
+        "vinte_tres" => 23,
+        "vinte_quatro" => 24,
+        "vinte_cinco" => 25
+    ];
 
     const UM = "01";
     const DOIS = "02";
@@ -77,9 +102,9 @@ class LotoFacil
     public function contaQtdNumeroMaisSaidos(array $arrayNumerosDosJogos)
     {
 
-        foreach ($arrayNumerosDosJogos as $numeros){
+        foreach ($arrayNumerosDosJogos as $numeros) {
 
-            switch ($numeros){
+            switch ($numeros) {
                 case self::UM:
                     $this->qtdVezesSaidos[1] = $this->qtdVezesSaidos[1] + 1;
                     break;
@@ -155,9 +180,7 @@ class LotoFacil
                 case self::VINTE_CINCO:
                     $this->qtdVezesSaidos[25] = $this->qtdVezesSaidos[25] + 1;
                     break;
-
             }
-
         }
 
         return true;
@@ -172,13 +195,13 @@ class LotoFacil
 
         foreach ($jogos as $jogo) {
 
-            $concurso = $jogo['COL 1'];
+            $concurso = $jogo['concurso'];
 
             //Remove a posição do concurso
-            unset($jogo['COL 1']);
+            unset($jogo['concurso']);
 
             //Remove a data do concurso
-            unset($jogo['COL 2']);
+            unset($jogo['data']);
 
             //Resta apenas os numeros saído deste concurso nessa variável $jogo
             //Converte para string a variavel $numeros
@@ -188,7 +211,6 @@ class LotoFacil
         }
 
         return $resultLotofacil;
-
     }
 
     /**
@@ -211,14 +233,13 @@ class LotoFacil
         $result = [];
         $cont = 1;
 
-        foreach ($this->qtdVezesSaidos as $posicao => $value){
+        foreach ($this->qtdVezesSaidos as $posicao => $value) {
 
-            if ($cont <= $qtdNumerosMaisSaidos){
+            if ($cont <= $qtdNumerosMaisSaidos) {
                 $result[$posicao] = $value;
             }
 
-            $cont = $cont +1;
-
+            $cont = $cont + 1;
         }
 
         return $result;
@@ -250,4 +271,27 @@ class LotoFacil
         $this->arrayNumeroLotoFacil = $arrayNumeroLotoFacil;
     }
 
+    /**
+     * @param array $arrayNumeroLotoFacil
+     * @return array
+     */
+    public function retornaValorTotalPorPosicaoJogo(array $arrayNumeroLotoFacil)
+    {
+        $posicao = [];
+
+        $valorPosicaoPorJogo = new RetornaValorTotalPorPosicaoJogo();
+
+        for ($a = 1; $a < (self::QUANTIDADE_NUMEROS_JOGOS + 1); $a++) {
+            $posicao["posicao_" . $a] = $valorPosicaoPorJogo->retornaValorTotalPorPosicaoJogo($arrayNumeroLotoFacil, $a);
+        }
+
+        return $posicao;
+    }
+
+
+    public function calculaPorcetagemSaidaPorPosicao(array $arrayPosicaoPorPosicao)
+    {
+        $calculaPorcentagel = new CalculaPorcetagemSaidaPorPosicao();
+        return $calculaPorcentagel->calculaPorcetagemSaidaPorPosicao($arrayPosicaoPorPosicao);
+    }
 }

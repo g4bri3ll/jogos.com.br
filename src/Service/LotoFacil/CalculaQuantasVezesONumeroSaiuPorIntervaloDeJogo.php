@@ -13,7 +13,7 @@ class CalculaQuantasVezesONumeroSaiuPorIntervaloDeJogo
         $frequencia = new RetornaFrequenciaSaidaNumeros();
 
         foreach ($lotoFacil->getArrayNumeroLotoFacil() as $num){
-            $frequencia->retornaFrequenciaNumeros($arrayNumeroLotoFacil, 1);
+            $frequencia->retornaFrequenciaNumeros($arrayNumeroLotoFacil, $num);
         }
 
         return $frequencia->getArrayNumerosFrequencia();
